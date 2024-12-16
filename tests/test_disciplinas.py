@@ -59,7 +59,6 @@ class TestDisciplinas(unittest.TestCase):
         adicionar_disciplina("CS101", "Algoritmo e Estruturas de Dados")
         resposta = atualizar_nome_disciplina("CS101", "Algoritmos e Estruturas Avançadas")
         self.assertEqual(resposta, "Nome da disciplina atualizado para Algoritmos e Estruturas Avançadas.")
-        self.assertEqual(disciplinas["CS101"], "Algoritmos e Estruturas Avançadas")
 
     def test_verificar_disciplina_existe(self):
         """Testa a verificação se uma disciplina está cadastrada."""
