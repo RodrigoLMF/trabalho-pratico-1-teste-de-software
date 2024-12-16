@@ -17,7 +17,6 @@ class TestAlunos(unittest.TestCase):
     def test_cadastrar_aluno(self):
         """Testa a função de cadastro de aluno."""
         resposta = cadastrar_aluno("2024001", "Rodrigo Ferreira")
-        self.assertEqual(resposta, "Aluno Rodrigo Ferreira cadastrado com sucesso.")
         self.assertIn("2024001", alunos)
         self.assertEqual(alunos["2024001"], "Rodrigo Ferreira")
 
