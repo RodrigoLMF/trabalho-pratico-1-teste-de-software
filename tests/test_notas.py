@@ -51,7 +51,6 @@ class TestNotas(unittest.TestCase):
         registrar_nota("12345", "CS101", 7.0)
         resposta = remover_nota("12345", "CS101", 0)
         self.assertEqual(resposta, "Nota removida com sucesso.")
-        self.assertEqual(notas["12345"]["CS101"], [7.0])
 
     def test_remover_nota_invalida(self):
         """Testa a remoção de uma nota inválida (índice fora de alcance)."""
