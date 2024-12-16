@@ -23,6 +23,21 @@ jobs:
       - name: Set PYTHONPATH for imports
         run: echo "PYTHONPATH=$(pwd)/src" >> $GITHUB_ENV
 
-      - name: Run tests with unittest
+      - name: Install dependencies
         run: |
-          python -m unittest discover -s tests
+          python -m pip install --upgrade pip
+          pip install coverage  # Instalar o pacote de cobertura de código
+
+      - name: Run tests with coverage
+        run: |
+          coverage run -m unittest discover -s tests  # Rodar os testes e coletar cobertura
+
+      - name: Generate coverage report
+        run: |
+          coverage report  # Mostrar o relatório de cobertura no terminal
+          coverage html  # Gerar um relatório HTML (opcional)
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          file: ./coverage.xml  # Aqui você pode ajustar para o local do seu arquivo de cobertura se necessário
