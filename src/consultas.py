@@ -48,18 +48,6 @@ def calcular_media_turma(codigo_disciplina):
         return f"Nenhuma nota registrada para a disciplina {disciplinas[codigo_disciplina]}."
     return total_notas / quantidade_notas
 
-def alunos_sem_notas():
-    """Lista alunos que ainda não possuem notas registradas."""
-    sem_notas = [alunos[matricula] for matricula in alunos if matricula not in notas]
-    return sem_notas
-
-def disciplinas_sem_notas():
-    """Lista disciplinas que ainda não possuem notas registradas."""
-    disciplinas_sem_nota = set(disciplinas.keys())
-    for matricula, notas_aluno in notas.items():
-        disciplinas_sem_nota -= set(notas_aluno.keys())
-    return [disciplinas[codigo] for codigo in disciplinas_sem_nota]
-
 def top_n_melhores_alunos(codigo_disciplina, n):
     """Lista os N melhores alunos em uma disciplina."""
     if codigo_disciplina not in disciplinas:
@@ -90,3 +78,88 @@ def ranking_disciplinas_por_desempenho():
         if isinstance(media, (int, float)):
             medias_disciplinas[codigo] = media
     return sorted(medias_disciplinas.items(), key=lambda x: x[1], reverse=True)
+
+def media_turma_por_disciplina(codigo_disciplina):
+    """Calcula a média da turma para uma disciplina específica."""
+    if codigo_disciplina not in disciplinas:
+        return f"Disciplina com código {codigo_disciplina} não encontrada."
+    soma_notas = 0
+    total_notas = 0
+    for matricula, notas_aluno in notas.items():
+        if codigo_disciplina in notas_aluno:
+            soma_notas += sum(notas_aluno[codigo_disciplina])
+            total_notas += len(notas_aluno[codigo_disciplina])
+    if total_notas == 0:
+        return f"Nenhuma nota registrada para a disciplina {disciplinas[codigo_disciplina]}."
+    return soma_notas / total_notas
+
+def media_geral_todas_disciplinas():
+    """Calcula a média geral de todas as disciplinas."""
+    medias = {}
+    for codigo_disciplina in disciplinas:
+        medias[codigo_disciplina] = media_turma_por_disciplina(codigo_disciplina)
+    return medias
+
+def melhores_alunos_por_disciplina(codigo_disciplina, top_n=3):
+    """Lista os melhores alunos de uma disciplina específica."""
+    if codigo_disciplina not in disciplinas:
+        return f"Disciplina com código {codigo_disciplina} não encontrada."
+    medias_alunos = []
+    for matricula, notas_aluno in notas.items():
+        if codigo_disciplina in notas_aluno:
+            media = sum(notas_aluno[codigo_disciplina]) / len(notas_aluno[codigo_disciplina])
+            medias_alunos.append((alunos[matricula], media))
+    medias_alunos.sort(key=lambda x: x[1], reverse=True)
+    return medias_alunos[:top_n]
+
+def melhores_alunos_geral(top_n=5):
+    """Lista os melhores alunos com base na média geral."""
+    medias_alunos = []
+    for matricula in alunos:
+        if matricula in notas:
+            soma_notas = 0
+            total_notas = 0
+            for notas_disciplina in notas[matricula].values():
+                soma_notas += sum(notas_disciplina)
+                total_notas += len(notas_disciplina)
+            if total_notas > 0:
+                media_geral = soma_notas / total_notas
+                medias_alunos.append((alunos[matricula], media_geral))
+    medias_alunos.sort(key=lambda x: x[1], reverse=True)
+    return medias_alunos[:top_n]
+
+def ranking_disciplinas_por_turma():
+    """Gera um ranking de disciplinas com base na média da turma."""
+    ranking = []
+    for codigo_disciplina in disciplinas:
+        media = media_turma_por_disciplina(codigo_disciplina)
+        ranking.append((disciplinas[codigo_disciplina], media))
+    ranking.sort(key=lambda x: x[1], reverse=True)
+    return ranking
+
+def aluno_com_mais_notas():
+    """Encontra o aluno que possui mais notas registradas."""
+    max_notas = 0
+    aluno_top = None
+    for matricula, notas_aluno in notas.items():
+        total_notas = sum(len(notas_disciplina) for notas_disciplina in notas_aluno.values())
+        if total_notas > max_notas:
+            max_notas = total_notas
+            aluno_top = alunos[matricula]
+    return aluno_top, max_notas
+
+def disciplinas_sem_notas():
+    """Lista todas as disciplinas que ainda não possuem notas registradas."""
+    disciplinas_sem_registros = []
+    for codigo_disciplina in disciplinas:
+        if all(codigo_disciplina not in notas_aluno for notas_aluno in notas.values()):
+            disciplinas_sem_registros.append(disciplinas[codigo_disciplina])
+    return disciplinas_sem_registros
+
+def alunos_sem_notas():
+    """Lista todos os alunos que ainda não possuem notas registradas."""
+    alunos_sem_registros = []
+    for matricula in alunos:
+        if matricula not in notas:
+            alunos_sem_registros.append(alunos[matricula])
+    return alunos_sem_registros
