@@ -1,1 +1,40 @@
+name: Python Tests and Coverage
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check out code
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.x
+
+    - name: Install dependencies
+      run: |
+        pip install -r requirements.txt
+        pip install coverage
+
+    - name: Run tests with coverage
+      run: |
+        coverage run -m unittest discover -s tests
+        coverage report
+        coverage html
+
+    - name: Upload coverage results as an artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: coverage-report
+        path: htmlcov/
 
