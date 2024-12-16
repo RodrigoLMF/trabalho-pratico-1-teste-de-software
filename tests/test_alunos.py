@@ -59,7 +59,7 @@ class TestAlunos(unittest.TestCase):
         cadastrar_aluno("2024001", "Rodrigo Ferreira")
         resposta = atualizar_nome_aluno("2024001", "Rodrigo Macêdo")
         self.assertEqual(resposta, "Nome do aluno atualizado para Rodrigo Macêdo.")
-        self.assertEqual(alunos["2024001"], "Rodrigo Macêdo")
+        self.assertEqual(alunos[2024001], "Rodrigo Macêdo")
 
     def test_verificar_aluno_existe(self):
         """Testa a verificação se um aluno está cadastrado."""
