@@ -21,10 +21,8 @@ jobs:
       with:
         python-version: 3.x
 
-    - name: Install dependencies
-      run: |
-        pip install coverage
-        pip install unittest  # Caso queira instalar algum outro pacote específico
+    - name: Install coverage
+      run: pip install coverage
 
     - name: Run tests with coverage
       run: |
