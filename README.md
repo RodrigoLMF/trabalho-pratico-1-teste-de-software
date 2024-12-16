@@ -13,7 +13,7 @@ O sistema permite as seguintes funcionalidades:
 5. Calcular a média de notas por aluno e por disciplina.
 6. Exibir alunos aprovados e reprovados com base em um critério de aprovação.
 
-Este sistema foi desenvolvido **sem interface gráfica** ou integração com banco de dados. Todos os dados são armazenados temporariamente em estruturas de dados Python.
+Este sistema foi desenvolvido sem interface gráfica ou integração com banco de dados. Todos os dados são armazenados temporariamente em estruturas de dados Python. Essa abordagem foi escolhida devido ao foco atual no uso de ferramentas de teste e na implementação de pipelines de CI/CD. Futuramente, pretende-se estender esta aplicação, adicionando uma interface front-end e integrando-a com um banco de dados, proporcionando maior funcionalidade e usabilidade ao sistema
 
 ## Tecnologias Utilizadas
 - **Linguagem de Programação:** Python 3.10+
