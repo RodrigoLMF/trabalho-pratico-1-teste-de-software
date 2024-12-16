@@ -40,17 +40,4 @@ def verificar_se_tem_notas(matricula, codigo_disciplina):
     """Verifica se um aluno possui notas registradas em uma disciplina."""
     return codigo_disciplina in notas.get(matricula, {})
 
-def limpar_notas_disciplina(codigo_disciplina):
-    """Remove todas as notas de uma disciplina."""
-    for matricula in notas:
-        if codigo_disciplina in notas[matricula]:
-            del notas[matricula][codigo_disciplina]
-    return f"Notas da disciplina {codigo_disciplina} removidas com sucesso."
-
-def listar_notas_por_disciplina(codigo_disciplina):
-    """Lista as notas de todos os alunos em uma disciplina."""
-    resultado = {}
-    for matricula, disciplinas in notas.items():
-        if codigo_disciplina in disciplinas:
-            resultado[matricula] = disciplinas[codigo_disciplina]
-    return resultado
+def limpar_notas_disciplina
