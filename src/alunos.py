@@ -44,3 +44,19 @@ def listar_alunos_por_matricula_ordenada():
 def listar_alunos_por_nome_ordenado():
     """Lista os alunos ordenados pelo nome."""
     return dict(sorted(alunos.items(), key=lambda item: item[1].lower()))
+
+def buscar_alunos_por_parte_nome(parte_nome):
+    """Busca alunos contendo parte do nome."""
+    return {matricula: aluno for matricula, aluno in alunos.items() if parte_nome.lower() in aluno.lower()}
+
+def listar_primeiros_n_alunos(n):
+    """Lista os primeiros N alunos cadastrados."""
+    return dict(list(alunos.items())[:n])
+
+def listar_ultimos_n_alunos(n):
+    """Lista os últimos N alunos cadastrados."""
+    return dict(list(alunos.items())[-n:])
+
+def alunos_com_nome_comprimento_maior_que(tamanho):
+    """Lista alunos com nomes maiores que o tamanho especificado."""
+    return {matricula: aluno for matricula, aluno in alunos.items() if len(aluno) > tamanho}
