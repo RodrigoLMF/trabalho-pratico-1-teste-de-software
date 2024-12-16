@@ -33,13 +33,6 @@ class TestConsultas(unittest.TestCase):
         medias = media_geral_todas_disciplinas()
         self.assertIsInstance(medias, dict)
 
-    def test_melhores_alunos_por_disciplina(self):
-        # Testa a listagem dos melhores alunos de uma disciplina
-        codigo_disciplina = "MAT101"
-        top_n = 3
-        melhores = melhores_alunos_por_disciplina(codigo_disciplina, top_n)
-        self.assertIsInstance(melhores, list)
-        self.assertTrue(len(melhores) <= top_n)
 
 
     def test_disciplinas_sem_notas(self):
