@@ -18,7 +18,6 @@ class TestDisciplinas(unittest.TestCase):
         """Testa a função de adicionar disciplina."""
         resposta = adicionar_disciplina("CS101", "Algoritmo e Estruturas de Dados")
         self.assertEqual(resposta, "Disciplina Algoritmo e Estruturas de Dados adicionada com sucesso.")
-        self.assertIn("CS101", disciplinas)
         self.assertEqual(disciplinas["CS101"], "Algoritmo e Estruturas de Dados")
 
     def test_adicionar_disciplina_duplicada(self):
