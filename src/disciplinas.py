@@ -44,3 +44,19 @@ def listar_disciplinas_ordenadas_por_codigo():
 def listar_disciplinas_ordenadas_por_nome():
     """Lista as disciplinas ordenadas pelo nome."""
     return dict(sorted(disciplinas.items(), key=lambda item: item[1].lower()))
+
+def listar_disciplinas_por_trecho_nome(trecho):
+    """Lista disciplinas contendo um trecho específico no nome."""
+    return {codigo: nome for codigo, nome in disciplinas.items() if trecho.lower() in nome.lower()}
+
+def listar_disciplinas_com_codigo_maior_que(limite):
+    """Lista disciplinas com código maior que o limite especificado."""
+    return {codigo: nome for codigo, nome in disciplinas.items() if codigo > limite}
+
+def listar_disciplinas_com_tamanho_nome_maior_que(tamanho):
+    """Lista disciplinas com nomes maiores que o tamanho especificado."""
+    return {codigo: nome for codigo, nome in disciplinas.items() if len(nome) > tamanho}
+
+def disciplinas_com_codigo_iniciando_por(inicio):
+    """Lista disciplinas cujo código inicia com um valor especificado."""
+    return {codigo: nome for codigo, nome in disciplinas.items() if str(codigo).startswith(str(inicio))}
